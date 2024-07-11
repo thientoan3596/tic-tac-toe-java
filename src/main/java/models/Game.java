@@ -41,6 +41,7 @@ public class Game {
                 }
             }
             if (states.get(states.size() - 1).hasWinner()) {
+                draw();
                 System.out.println("You won!");
                 if (mainMenu() == 2) {
                     System.out.println("bye");
@@ -49,7 +50,7 @@ public class Game {
                 reset();
             }
             if (states.get(states.size() - 1).hasNoSpace()) {
-                System.out.println("Draw!");
+                draw();
                 if (mainMenu() == 2) {
                     System.out.println("bye");
                     return;
@@ -60,8 +61,8 @@ public class Game {
             int cpuSelectedCell = validMoves[rand.nextInt(validMoves.length)];
             usedCell.add(cpuSelectedCell);
             states.add(states.get(states.size() - 1).makeMove(cpuSelectedCell));
-            draw();
             if (states.get(states.size() - 1).hasWinner()) {
+                draw();
                 System.out.println("You lose!");
                 if (mainMenu() == 2) {
                     System.out.println("bye");
@@ -70,7 +71,7 @@ public class Game {
                 reset();
             }
             if (states.get(states.size() - 1).hasNoSpace()) {
-                System.out.println("Draw!");
+                draw();
                 if (mainMenu() == 2) {
                     System.out.println("bye");
                     return;
@@ -117,6 +118,10 @@ public class Game {
         if(System.getProperty("os.name").contains("Linux")) {
             System.out.print("\033[H\033[2J");
             System.out.flush();
+        } else if (System.getProperty("os.name").contains("Windows")) {
+            for (int i = 0; i < 20; i++) {
+                System.out.println();
+            }
         }
     }
 }
