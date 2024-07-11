@@ -51,6 +51,7 @@ public class Game {
             }
             if (states.get(states.size() - 1).hasNoSpace()) {
                 draw();
+                System.out.println("Draw!");
                 if (mainMenu() == 2) {
                     System.out.println("bye");
                     return;
@@ -72,6 +73,7 @@ public class Game {
             }
             if (states.get(states.size() - 1).hasNoSpace()) {
                 draw();
+                System.out.println("Draw!");
                 if (mainMenu() == 2) {
                     System.out.println("bye");
                     return;
