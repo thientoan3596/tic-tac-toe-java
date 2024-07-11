@@ -91,7 +91,7 @@ public class Game {
                 System.out.printf("%s%s", val, j < lastState[0].length - 1 ? "|" : "");
             }
             System.out.println();
-            System.out.println("---");
+            System.out.println("-----");
         }
     }
     private void reset(){
