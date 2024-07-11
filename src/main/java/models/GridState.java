@@ -12,7 +12,7 @@ public class GridState {
      * 1 = X
      * -1 = O
      */
-    private int[][] grid = new int[3][3];
+    private final int[][] grid = new int[3][3];
     private int turnCount = 0;
     private static boolean isX = true;
     public GridState() {
@@ -62,7 +62,7 @@ public class GridState {
         if(cellID < 1 || cellID > 9)
             throw new IllegalMoveException("Invalid Cell [" + cellID + "].\n Must be within [1:9] (inclusive).");
         int x = (cellID-1)%3 +1;
-        int y = (int) Math.ceil(cellID/3);
+        int y = (int) (double) (cellID / 3);
         return makeMove(x + 1, y + 1);
     }
     public GridState makeMove(int colPosition, int rowPosition)
