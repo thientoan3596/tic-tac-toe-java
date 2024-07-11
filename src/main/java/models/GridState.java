@@ -12,12 +12,14 @@ public class GridState {
      * 1 = X
      * -1 = O
      */
-    private final int[][] grid = new int[3][3];
+    private final int[][] grid ; //new int[3][3];
     private int turnCount = 0;
     private static boolean isX = true;
     public GridState() {
+        grid = new int[3][3];
     }
-    private GridState(int x, int y, int turnCount) {
+    private GridState(int[][] prevGrid, int x, int y, int turnCount) {
+        grid = prevGrid;
         grid[x][y] = isX ? 1 : -1;
         this.turnCount = turnCount;
         isX = !isX;
@@ -61,9 +63,9 @@ public class GridState {
     throws  IllegalMoveException, NoValidMoveLeftException {
         if(cellID < 1 || cellID > 9)
             throw new IllegalMoveException("Invalid Cell [" + cellID + "].\n Must be within [1:9] (inclusive).");
-        int x = (cellID-1)%3 +1;
-        int y = (int) (double) (cellID / 3);
-        return makeMove(x + 1, y + 1);
+        int y = (cellID-1)%3 +1;
+        int x = (cellID -1 )/3+1;
+        return makeMove(x , y );
     }
     public GridState makeMove(int colPosition, int rowPosition)
     throws  IllegalMoveException, NoValidMoveLeftException {
@@ -74,9 +76,9 @@ public class GridState {
                 _y = rowPosition - 1;
         if (grid[_x][_y] != 0)
             throw new IllegalMoveException("Invalid Cell [" + colPosition + ":" + rowPosition + "].");
-        if (!hasWinner() && !hasNoSpace())
+        if (!hasWinner() && hasNoSpace())
             throw new NoValidMoveLeftException();
-        return new GridState(_x, _y, turnCount + 1);
+        return new GridState(grid ,_x, _y, turnCount + 1);
     }
     public boolean hasWinner (){
         return isOWin() || isXWin();
