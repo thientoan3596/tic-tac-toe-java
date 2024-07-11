@@ -17,7 +17,6 @@ public class Game {
     public void loop() {
         while (true) {
             draw();
-            clearScreen();
             System.out.println("Your turn");
             int cellID;
             while (true) {
@@ -61,6 +60,7 @@ public class Game {
             int cpuSelectedCell = validMoves[rand.nextInt(validMoves.length)];
             usedCell.add(cpuSelectedCell);
             states.add(states.get(states.size() - 1).makeMove(cpuSelectedCell));
+            draw();
             if (states.get(states.size() - 1).hasWinner()) {
                 System.out.println("You lose!");
                 if (mainMenu() == 2) {
@@ -95,6 +95,7 @@ public class Game {
     }
 
     public void draw() {
+        clearScreen();
         int[][] lastState = states.get(states.size() - 1).getGrid();
         for (int i = 0; i < lastState.length; i++) {
             for (int j = 0; j < lastState[0].length; j++) {
