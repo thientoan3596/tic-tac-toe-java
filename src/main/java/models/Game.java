@@ -85,12 +85,13 @@ public class Game {
     }
     public void draw(){
         int [][] lastState = states.get(states.size()-1).getGrid();
-        for (int[] ints : lastState) {
+        for (int i = 0; i < lastState.length; i++){
             for (int j = 0; j < lastState[0].length; j++) {
-                String val = ints[j] == 0 ? " " : ints[j] == 1 ? "X" : "O";
+                String val = lastState[i][j]  == 0 ? String.valueOf((i*3)+j+1) : lastState[i][j] == 1 ? "X" : "O";
                 System.out.printf("%s%s", val, j < lastState[0].length - 1 ? "|" : "");
             }
-            System.out.println("_____");
+            System.out.println();
+            System.out.println("---");
         }
     }
     private void reset(){
